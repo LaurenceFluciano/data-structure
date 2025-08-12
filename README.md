@@ -28,5 +28,3 @@ Certifique-se de que o compilador `gcc` esteja instalado na sua máquina.
 | **Pilha LIFO Dinâmica**                | `stack/lifo.stack.dynamic.c`           | C                              | Pilha dinâmica, implementação tradicional.                                      |
 | **Pilha LIFO Dinâmica Genérica**       | `stack/lifo.stack.dynamic.generic.c`   | C                              | Pilha dinâmica genérica, suporta múltiplos tipos de dados.                      |
 | **Pilha LIFO Estática**                | `stack/lifo.stack.static.c`            | C                              | Pilha implementada com array estático.                                          |
-| **Pilha LIFO Dinâmica (sem extensão)** | `stack/lifo.stack.dynamic`             | Provavelmente C (sem extensão) | Versão da pilha dinâmica (sem extensão no nome do arquivo).                     |
-| **Programa Principal da Pilha**        | `stack/main`                           | Provavelmente C (sem extensão) | Programa para testar as implementações de pilha.                                |
