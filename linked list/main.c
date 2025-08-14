@@ -106,19 +106,57 @@ Node* getNode(DoublyLinkedList* dllist, int index)
     return current;
 }
 
+int insert(DoublyLinkedList* dllist, int index, void* data, size_t size)
+{
+    Node* currentNode = getNode(dllist, index);
+    if (!currentNode) return 0;
+    Node* child = malloc(sizeof(Node));
+    if (!child) return 0;
+    child->data = malloc(size); 
+    memcpy(child->data, data, size);
+    child->next = currentNode;
+    if(currentNode->prev != NULL){
+        child->prev = currentNode->prev;
+        currentNode->prev->next = child;
+    } else child->prev = NULL;
+    currentNode->prev = child;
+    dllist->size++;
+    return 1;
+
+} 
+
 int main()
 {
     DoublyLinkedList example;
 
-    int a = 3;
+    int a = 1;
+    int b = 3;
+    int c = 4;
+
 
     init(&example);
     
     push(&example,&a,sizeof(a));
+    push(&example,&b,sizeof(b));
+    push(&example,&c,sizeof(c));
 
+    Node* temp = example.head;
+    for(int i = 0; i < example.size && temp != NULL; i++)
+    {
+        printf("%d\n", *(int*)(temp->data));
+        temp = temp->next;
+    }
 
-    printf("%d\n", *(int*)(example.head->data));
+    int m = 2;
 
+    insert(&example,1,&m,sizeof(m));
+    printf("\n");
+    temp = example.head;
+    for(int i = 0; i < example.size && temp != NULL; i++)
+    {
+        printf("%d\n", *(int*)(temp->data));
+        temp = temp->next;
+    }
 
 
     return 0;
