@@ -19,7 +19,14 @@
 
 ### Conceito:
 
-Pilhas são estruturas de dados LIFO (Last in First Out) isso significa que o ultimo valor colocado será o primeiro a sair. 
+Pilhas são estruturas de dados LIFO (Last In, First Out), ou seja, o último valor inserido será o primeiro a sair.
+
+Uma analogia simples é com pratos empilhados:
+
+- Sempre colocamos o novo prato no topo da pilha, tornando-o o último a entrar.
+- Quando retiramos um prato, pegamos o do topo, que é o primeiro a sair.
+
+Assim, o comportamento da pilha segue exatamente a lógica Last In, First Out: o último a entrar é o primeiro a sair.
 
 ### Métodos disponíveis:
 
