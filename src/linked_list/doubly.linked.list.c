@@ -1,27 +1,6 @@
-#include <stdio.h>
+#include "doubly.linked.list.h"
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
-#include <stddef.h>
-
-typedef struct Node {
-    void* data;
-    struct Node* next;
-    struct Node* prev;
-} Node;
-
-typedef struct DoublyLinkedList {
-    Node* head;
-    Node* tail;
-    int size;
-} DoublyLinkedList;
-
-/**
- *         head
- * x11 <- [Nó 1] -> x12
- * 
- */
-
 
 void init(DoublyLinkedList* dllist)
 {
@@ -30,12 +9,12 @@ void init(DoublyLinkedList* dllist)
     dllist-> size = 0;
 }
 
-int push(DoublyLinkedList* dllist, void* data, size_t size)
+bool push(DoublyLinkedList* dllist, void* data, size_t size)
 {
-    // Evite segfault
-    if (!dllist) return 0;
+    // Avoid segfault
+    if (!dllist) return false;
     Node* child = malloc(sizeof(Node));
-    if (!child) return 0;
+    if (!child) return false;
     child->data = malloc(size); 
     memcpy(child->data, data, size);
     child->next = NULL;
@@ -44,7 +23,7 @@ int push(DoublyLinkedList* dllist, void* data, size_t size)
     else dllist->tail->next = child; 
     dllist->tail = child;  
     dllist->size++;
-    return 1;
+    return true;
 }
 
 Node* removedll(DoublyLinkedList* dllist, Node* address)
@@ -73,7 +52,9 @@ void cleardll(DoublyLinkedList* dllist)
     for(int i = 0; current != NULL; i++)
     {
         Node* next = current->next;
-        removedll(dllist,current);
+        Node* result = removedll(dllist,current);
+        free(result->data);
+        free(result);
         current = next;
     }
 }
@@ -83,7 +64,6 @@ Node* getNode(DoublyLinkedList* dllist, int index)
     if (!dllist || !dllist->head) return NULL;
     if (index == -1) return dllist->tail;      
     if (index < 0 || index >= dllist->size) return NULL;
-
     int opposite = dllist->size - (index + 1);
     Node* current;
     if (opposite > index)
@@ -102,16 +82,15 @@ Node* getNode(DoublyLinkedList* dllist, int index)
             current = current->prev;
         }
     }
-
     return current;
 }
 
-int insert(DoublyLinkedList* dllist, int index, void* data, size_t size)
+bool insert(DoublyLinkedList* dllist, int index, void* data, size_t size)
 {
     Node* currentNode = getNode(dllist, index);
-    if (!currentNode) return 0;
+    if (!currentNode) return false;
     Node* child = malloc(sizeof(Node));
-    if (!child) return 0;
+    if (!child) return false;
     child->data = malloc(size); 
     memcpy(child->data, data, size);
     child->next = currentNode;
@@ -121,43 +100,5 @@ int insert(DoublyLinkedList* dllist, int index, void* data, size_t size)
     } else child->prev = NULL;
     currentNode->prev = child;
     dllist->size++;
-    return 1;
-
+    return true;
 } 
-
-int main()
-{
-    DoublyLinkedList example;
-
-    int a = 1;
-    int b = 3;
-    int c = 4;
-
-
-    init(&example);
-    
-    push(&example,&a,sizeof(a));
-    push(&example,&b,sizeof(b));
-    push(&example,&c,sizeof(c));
-
-    Node* temp = example.head;
-    for(int i = 0; i < example.size && temp != NULL; i++)
-    {
-        printf("%d\n", *(int*)(temp->data));
-        temp = temp->next;
-    }
-
-    int m = 2;
-
-    insert(&example,1,&m,sizeof(m));
-    printf("\n");
-    temp = example.head;
-    for(int i = 0; i < example.size && temp != NULL; i++)
-    {
-        printf("%d\n", *(int*)(temp->data));
-        temp = temp->next;
-    }
-
-
-    return 0;
-}

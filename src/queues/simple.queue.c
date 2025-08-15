@@ -1,25 +1,6 @@
-#include <stdio.h>
+#include "simple.queue.h"
 #include <stdlib.h>
 #include <string.h>
-
-typedef struct No
-{
-    void* data;
-    struct No* reference;
-} No;
-
-typedef struct
-{
-    No* front;
-    No* tail;
-    int size;
-} Queues;
-
-void NotAllocateError()
-{
-    fprintf(stderr, "Nao foi possivel alocar memoria.");
-    exit(1);
-}
 
 void init(Queues* queues)
 {
@@ -43,10 +24,10 @@ void destroy(Queues* queues)
     queues->size = 0;
 }
 
-void enqueue(Queues* queues, void* data, size_t size)
+bool enqueue(Queues* queues, void* data, size_t size)
 {
     No* new  = malloc(sizeof(No));
-    if (new == NULL) NotAllocateError();
+    if (new == NULL) return false;
     new->data = malloc(size);
     memcpy(new->data, data, size);
     new->reference = NULL;
@@ -54,61 +35,35 @@ void enqueue(Queues* queues, void* data, size_t size)
     if(queues->front == NULL) queues->front = new;
     queues->tail = new;
     queues->size++;
+    return true;
 }
 
-void dequeue(Queues* queues)
+bool dequeue(Queues* queues)
 {
     if(queues->front == NULL) 
-    {
-        return;
-    }
+        return false;
     No* temp = queues->front;
     queues->front = temp->reference;
-    if (queues->front == NULL) {
+    if (queues->front == NULL) 
         queues->tail = NULL;
-    }
     free(temp);
-    queues->size--;;
+    queues->size--;
+    return true;
 }
 
 void* getFront(Queues* queues)
 {
-    if(queues->front == NULL) return -1;
+    if(queues->front == NULL) return NULL;
     return queues->front->data;
 }
 
 void* getTail(Queues* queues)
 {
-    if(queues->tail == NULL) return -1;
+    if(queues->tail == NULL) return NULL;
     return queues->tail->data;
 }
 
 int getSize(Queues* queues)
 {
     return queues->size;
-}
-
-int main()
-{
-    Queues queues;
-    init(&queues);
-
-    int a = 0;
-    int b = 8;
-    int c = 4;
-
-    enqueue(&queues,a,sizeof(int));
-    enqueue(&queues,b,sizeof(int));
-    enqueue(&queues,c,sizeof(int));
-
-    printf("Tamanho atual da fila: %d\n\n", getSize(&queues));
-
-    while(getSize(&queues) > 0)
-    {
-        if(getFront(&queues) == -1) return 1;
-        printf("Próximo valor a ser antendido: %d\n", getFront(&queues));
-        dequeue(&queues);
-    }
-
-    return 0;
 }
