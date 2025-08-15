@@ -2,19 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-void init(Stack* stack) 
+void initStack(Stack* stack) 
 {
     stack->top = NULL;
 }
 
-bool isEmpty(Stack* stack)
+bool isEmptyStack(Stack* stack)
 {
     return stack->top == NULL;
 }
 
-bool push(Stack* stack, void* data, size_t size)
+bool pushStack(Stack* stack, void* data, size_t size)
 {
-    No* new = malloc(sizeof(No));
+    NodeStack* new = (NodeStack*)malloc(sizeof(NodeStack));
     if(new == NULL)
         return false;
     new->data = malloc(size);
@@ -24,19 +24,19 @@ bool push(Stack* stack, void* data, size_t size)
     return true;
 }
 
-void* pop(Stack* stack)
+void* popStack(Stack* stack)
 {
-    if(isEmpty(stack)) return NULL;
-    No* temp = stack->top;
+    if(isEmptyStack(stack)) return NULL;
+    NodeStack* temp = stack->top;
     void* recovery = temp->data;
     stack->top = temp->next;
     free(temp);
     return recovery;
 }
 
-void* peek(Stack* stack)
+void* peekStack(Stack* stack)
 {
-    if(isEmpty(stack))
+    if(isEmptyStack(stack))
         return NULL;
     return stack->top->data;
 }

@@ -2,17 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-void init(Queues* queues)
+void initq(Queues* queues)
 {
     queues->front = NULL;
     queues->tail = NULL;
     queues->size = 0;
 }
 
-void destroy(Queues* queues)
+void destroyq(Queues* queues)
 {
-    No* current = queues->front;
-    No* temp;
+    Nodeq* current = queues->front;
+    Nodeq* temp;
     while (current != NULL)
     {
         temp = current;
@@ -24,9 +24,9 @@ void destroy(Queues* queues)
     queues->size = 0;
 }
 
-bool enqueue(Queues* queues, void* data, size_t size)
+bool enqueueq(Queues* queues, void* data, size_t size)
 {
-    No* new  = malloc(sizeof(No));
+    Nodeq* new  = (Nodeq*)malloc(sizeof(Nodeq));
     if (new == NULL) return false;
     new->data = malloc(size);
     memcpy(new->data, data, size);
@@ -38,11 +38,11 @@ bool enqueue(Queues* queues, void* data, size_t size)
     return true;
 }
 
-bool dequeue(Queues* queues)
+bool dequeueq(Queues* queues)
 {
     if(queues->front == NULL) 
         return false;
-    No* temp = queues->front;
+    Nodeq* temp = queues->front;
     queues->front = temp->reference;
     if (queues->front == NULL) 
         queues->tail = NULL;
@@ -51,19 +51,19 @@ bool dequeue(Queues* queues)
     return true;
 }
 
-void* getFront(Queues* queues)
+void* getFrontq(Queues* queues)
 {
     if(queues->front == NULL) return NULL;
     return queues->front->data;
 }
 
-void* getTail(Queues* queues)
+void* getTailq(Queues* queues)
 {
     if(queues->tail == NULL) return NULL;
     return queues->tail->data;
 }
 
-int getSize(Queues* queues)
+int getSizeq(Queues* queues)
 {
     return queues->size;
 }

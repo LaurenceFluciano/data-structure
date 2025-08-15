@@ -3,19 +3,19 @@
 #ifndef STACK
 #define STACK
 
-typedef struct No {
+typedef struct NodeStack {
     void* data;
-    struct No* next;
-} No;
+    struct NodeStack* next;
+} NodeStack;
 
 typedef struct {
-    No* top;
+    NodeStack* top;
 } Stack;
 
-void init(Stack* stack) ;
-bool isEmpty(Stack* stack);
-bool push(Stack* stack, void* data, size_t size);
-void* pop(Stack* stack);
-void* peek(Stack* stack);
+void initStack(Stack* stack) ;
+bool isEmptyStack(Stack* stack);
+bool pushStack(Stack* stack, void* data, size_t size);
+void* popStack(Stack* stack);
+void* peekStack(Stack* stack);
 
 #endif

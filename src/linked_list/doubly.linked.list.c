@@ -2,18 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-void init(DoublyLinkedList* dllist)
+void initdll(DoublyLinkedList* dllist)
 {
     dllist->head = NULL;
     dllist->tail = NULL;
     dllist-> size = 0;
 }
 
-bool push(DoublyLinkedList* dllist, void* data, size_t size)
+bool pushdll(DoublyLinkedList* dllist, void* data, size_t size)
 {
     // Avoid segfault
     if (!dllist) return false;
-    Node* child = malloc(sizeof(Node));
+    NodeDll* child = (NodeDll*)malloc(sizeof(NodeDll));
     if (!child) return false;
     child->data = malloc(size); 
     memcpy(child->data, data, size);
@@ -26,7 +26,7 @@ bool push(DoublyLinkedList* dllist, void* data, size_t size)
     return true;
 }
 
-Node* removedll(DoublyLinkedList* dllist, Node* address)
+NodeDll* removedll(DoublyLinkedList* dllist, NodeDll* address)
 {
     if (!dllist || !address) return NULL;
 
@@ -48,24 +48,24 @@ Node* removedll(DoublyLinkedList* dllist, Node* address)
 
 void cleardll(DoublyLinkedList* dllist)
 {
-    Node* current = dllist->head;
+    NodeDll* current = dllist->head;
     for(int i = 0; current != NULL; i++)
     {
-        Node* next = current->next;
-        Node* result = removedll(dllist,current);
+        NodeDll* next = current->next;
+        NodeDll* result = removedll(dllist,current);
         free(result->data);
         free(result);
         current = next;
     }
 }
 
-Node* getNode(DoublyLinkedList* dllist, int index)
+NodeDll* getNodedll(DoublyLinkedList* dllist, int index)
 {
     if (!dllist || !dllist->head) return NULL;
     if (index == -1) return dllist->tail;      
     if (index < 0 || index >= dllist->size) return NULL;
     int opposite = dllist->size - (index + 1);
-    Node* current;
+    NodeDll* current;
     if (opposite > index)
     {
         current = dllist->head;
@@ -85,11 +85,11 @@ Node* getNode(DoublyLinkedList* dllist, int index)
     return current;
 }
 
-bool insert(DoublyLinkedList* dllist, int index, void* data, size_t size)
+bool insertdll(DoublyLinkedList* dllist, int index, void* data, size_t size)
 {
-    Node* currentNode = getNode(dllist, index);
+    NodeDll* currentNode = getNodedll(dllist, index);
     if (!currentNode) return false;
-    Node* child = malloc(sizeof(Node));
+    NodeDll* child = (NodeDll*)malloc(sizeof(NodeDll));
     if (!child) return false;
     child->data = malloc(size); 
     memcpy(child->data, data, size);

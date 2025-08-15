@@ -1,4 +1,4 @@
-#include "linked_list/doubly.linked.list.h"
+#include "src/linked_list/doubly.linked.list.h"
 #include <stdio.h>
 
 int main()
@@ -10,13 +10,13 @@ int main()
     int c = 4;
 
 
-    init(&example);
+    initdll(&example);
     
-    push(&example,&a,sizeof(a));
-    push(&example,&b,sizeof(b));
-    push(&example,&c,sizeof(c));
+    pushdll(&example,&a,sizeof(a));
+    pushdll(&example,&b,sizeof(b));
+    pushdll(&example,&c,sizeof(c));
 
-    Node* temp = example.head;
+    NodeDll* temp = example.head;
     for(int i = 0; i < example.size && temp != NULL; i++)
     {
         printf("%d\n", *(int*)(temp->data));
@@ -25,7 +25,7 @@ int main()
 
     int m = 2;
 
-    insert(&example,1,&m,sizeof(m));
+    insertdll(&example,1,&m,sizeof(m));
     printf("\n");
     temp = example.head;
     for(int i = 0; i < example.size && temp != NULL; i++)

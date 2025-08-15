@@ -3,23 +3,23 @@
 #ifndef DOUBLY_LINKED_LIST_H
 #define DOUBLY_LINKED_LIST_H
 
-typedef struct Node {
+typedef struct NodeDll {
     void* data;
-    struct Node* next;
-    struct Node* prev;
-} Node;
+    struct NodeDll* next;
+    struct NodeDll* prev;
+} NodeDll;
 
 typedef struct DoublyLinkedList {
-    Node* head;
-    Node* tail;
+    NodeDll* head;
+    NodeDll* tail;
     int size;
 } DoublyLinkedList;
 
-void init(DoublyLinkedList* dllist);
-bool push(DoublyLinkedList* dllist, void* data, size_t size);
-Node* removedll(DoublyLinkedList* dllist, Node* address);
+void initdll(DoublyLinkedList* dllist);
+bool pushdll(DoublyLinkedList* dllist, void* data, size_t size);
+NodeDll* removedll(DoublyLinkedList* dllist, NodeDll* address);
 void cleardll(DoublyLinkedList* dllist);
-Node* getNode(DoublyLinkedList* dllist, int index);
-bool insert(DoublyLinkedList* dllist, int index, void* data, size_t size);
+NodeDll* getNodedll(DoublyLinkedList* dllist, int index);
+bool insertdll(DoublyLinkedList* dllist, int index, void* data, size_t size);
 
 #endif

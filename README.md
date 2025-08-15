@@ -26,11 +26,11 @@ Pilhas são estruturas de dados LIFO (Last in First Out) isso significa que o ul
 Os métodos de pilhas geralmente são `push`, `peek` e `pop` como você pode imaginar são exatamente os mesmo métodos implementados, no entanto no C adicionei alguns módulos extras, veja abaixo todas as funções disponíveis:
 
 
-- init — Inicializa a pilha.
-- isEmpty — Retorna true se a pilha estiver vazia.
-- push — Adiciona um elemento no topo da pilha.
-- pop — Remove e retorna o elemento do topo da pilha.
-- peek — Retorna o elemento do topo da pilha sem removê-lo.
+- initStack — Inicializa a pilha.
+- isEmptyStack — Retorna true se a pilha estiver vazia.
+- pushStack — Adiciona um elemento no topo da pilha.
+- popStack — Remove e retorna o elemento do topo da pilha.
+- peekStack — Retorna o elemento do topo da pilha sem removê-lo.
 
 ### Exemplo prático — Pilha como sistema de Undo
 

@@ -4,25 +4,25 @@
 #define SIMPLE_QUEUE_H
 
 
-typedef struct No
+typedef struct Nodeq
 {
     void* data;
-    struct No* reference;
-} No;
+    struct Nodeq* reference;
+} Nodeq;
 
 typedef struct
 {
-    No* front;
-    No* tail;
+    Nodeq* front;
+    Nodeq* tail;
     int size;
 } Queues;
 
-void init(Queues* queues);
-void destroy(Queues* queues);
-bool enqueue(Queues* queues, void* data, size_t size);
-bool dequeue(Queues* queues);
-void* getFront(Queues* queues);
-void* getTail(Queues* queues);
-int getSize(Queues* queues);
+void initq(Queues* queues);
+void destroyq(Queues* queues);
+bool enqueueq(Queues* queues, void* data, size_t size);
+bool dequeueq(Queues* queues);
+void* getFrontq(Queues* queues);
+void* getTailq(Queues* queues);
+int getSizeq(Queues* queues);
 
 #endif
