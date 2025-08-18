@@ -1,39 +1,36 @@
-#include "src/linked_list/doubly.linked.list.h"
+#include "binary_tree.h" 
 #include <stdio.h>
 
 int main()
 {
-    DoublyLinkedList example;
+    int data1 = 5;
+    int data2 = 4;
+    int data3 = 3;
+    int data4 = 7;
 
-    int a = 1;
-    int b = 3;
-    int c = 4;
+    NodeTree* firstNode = createNodeTree(&data1,sizeof(data1));
+    NodeTree* secondNode = createNodeTree(&data2,sizeof(data2));
+    NodeTree* thirdyNode = createNodeTree(&data3,sizeof(data3));
 
+    NodeTree* other = createNodeTree(&data4,sizeof(data4));
 
-    initdll(&example);
-    
-    pushdll(&example,&a,sizeof(a));
-    pushdll(&example,&b,sizeof(b));
-    pushdll(&example,&c,sizeof(c));
+    BinaryTree binaryTree;
+    binaryTree.root = firstNode;
+    binaryTree.depth++;
 
-    NodeDll* temp = example.head;
-    for(int i = 0; i < example.size && temp != NULL; i++)
-    {
-        printf("%d\n", *(int*)(temp->data));
-        temp = temp->next;
-    }
+    binaryTree.root->left_child = secondNode;
+    binaryTree.root->right_child = thirdyNode;
+    binaryTree.depth++;
 
-    int m = 2;
+    secondNode->left_child = other;
+    binaryTree.depth++;
 
-    insertdll(&example,1,&m,sizeof(m));
-    printf("\n");
-    temp = example.head;
-    for(int i = 0; i < example.size && temp != NULL; i++)
-    {
-        printf("%d\n", *(int*)(temp->data));
-        temp = temp->next;
-    }
+    printf("Root:\n           %d", *(int*)binaryTree.root->data);
 
+    printf("\nChilds:   / \\");
+    printf("\n         %d   %d\n", *(int*)secondNode->data, *(int*)thirdyNode->data);
+    printf("        /\n");
+     printf("       %d\n",*(int*)other->data);
 
     return 0;
 }
