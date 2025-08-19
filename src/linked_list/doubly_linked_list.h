@@ -1,5 +1,7 @@
 #include <stddef.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
 #ifndef DOUBLY_LINKED_LIST_H
 #define DOUBLY_LINKED_LIST_H
 

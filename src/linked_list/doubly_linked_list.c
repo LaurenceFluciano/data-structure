@@ -16,6 +16,10 @@ bool pushdll(DoublyLinkedList* dllist, void* data, size_t size)
     NodeDll* child = (NodeDll*)malloc(sizeof(NodeDll));
     if (!child) return false;
     child->data = malloc(size); 
+    if (!child->data) {
+        free(child);
+        return false;
+    }
     memcpy(child->data, data, size);
     child->next = NULL;
     child->prev = dllist->tail;

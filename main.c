@@ -1,36 +1,29 @@
 #include "binary_tree.h" 
-#include <stdio.h>
 
 int main()
 {
-    int data1 = 5;
-    int data2 = 4;
-    int data3 = 3;
-    int data4 = 7;
+    int values[] = {1,2,3,4,5,6,7,8};
 
-    NodeTree* firstNode = createNodeTree(&data1,sizeof(data1));
-    NodeTree* secondNode = createNodeTree(&data2,sizeof(data2));
-    NodeTree* thirdyNode = createNodeTree(&data3,sizeof(data3));
+    NodeTree* root = createNodeTree(&values[0],sizeof(int));
+    root->left = createNodeTree(&values[1],sizeof(int));
+    root->right= createNodeTree(&values[2],sizeof(int));
+    root->left->left = createNodeTree(&values[3],sizeof(int));
+    root->left->right = createNodeTree(&values[4],sizeof(int));
+    root->right->right = createNodeTree(&values[5],sizeof(int));
 
-    NodeTree* other = createNodeTree(&data4,sizeof(data4));
 
-    BinaryTree binaryTree;
-    binaryTree.root = firstNode;
-    binaryTree.depth++;
+    DoublyLinkedList dll;
+    // TEM QUE INICIALIAR ANTES
+    initdll(&dll);
 
-    binaryTree.root->left_child = secondNode;
-    binaryTree.root->right_child = thirdyNode;
-    binaryTree.depth++;
+    transversalPreOrder(root,&dll);
 
-    secondNode->left_child = other;
-    binaryTree.depth++;
-
-    printf("Root:\n           %d", *(int*)binaryTree.root->data);
-
-    printf("\nChilds:   / \\");
-    printf("\n         %d   %d\n", *(int*)secondNode->data, *(int*)thirdyNode->data);
-    printf("        /\n");
-     printf("       %d\n",*(int*)other->data);
+    NodeDll* temp = dll.head;
+    for(int i = 0; i < dll.size; i++)
+    {
+        printf("%d\n",*(int*)temp->data);
+        temp = temp->next;
+    }
 
     return 0;
 }
