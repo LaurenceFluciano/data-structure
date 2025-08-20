@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/unit"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "Windows-msvc",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "intelliSenseMode": "windows-msvc-x64"
+        },
+        {
+            "name": "Mac-Clang",
+            "intelliSenseMode": "macos-clang-x64",
+            "includePath": ["${workspaceFolder}/**"]
+        }
+    ],
+    "version": 4
+}

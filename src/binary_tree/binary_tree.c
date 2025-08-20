@@ -18,16 +18,32 @@ NodeTree* createNodeTree(void *data, size_t size)
     return temp;
 }
 
-void transversalPreOrder(NodeTree* node, DoublyLinkedList* dllist) {
+
+// Depth-First Search (DFS) algorithms
+// Visit root, left subtree and right subtree
+void transversalPreOrder(NodeTree* node, DoublyLinkedList* dllist) 
+{
     if (node == NULL) return;
-
     bool result = pushdll(dllist,node->data,node->size);
-
-    if(!result) {
-        fprintf(stderr, "Erro: falha ao alocar memória.\n");
-        exit(1);
-    }
-
     transversalPreOrder(node->left, dllist);
     transversalPreOrder(node->right, dllist);
 }
+
+// Visit left subtree, root and right subtree
+void transversalInOrder(NodeTree* node, DoublyLinkedList* dllist) 
+{
+    if (node == NULL) return;
+    transversalInOrder(node->left, dllist);
+    bool result = pushdll(dllist,node->data,node->size);
+    transversalInOrder(node->right, dllist);
+}
+
+// Visit left subtree, right subtree and root
+void transversalPostOrder(NodeTree* node, DoublyLinkedList* dllist)
+{
+    if(node == NULL) return;
+    transversalPostOrder(node->left, dllist);
+    transversalPostOrder(node->right, dllist);
+    bool result = pushdll(dllist,node->data,node->size);
+}
+

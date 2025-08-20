@@ -24,6 +24,7 @@ typedef struct BinaryTree
 void initBTree(BinaryTree* bt); 
 NodeTree* createNodeTree(void *data, size_t size);
 void transversalPreOrder(NodeTree* node, DoublyLinkedList* dllist);
-
+void transversalInOrder(NodeTree* node, DoublyLinkedList* dllist);
+void transversalPostOrder(NodeTree* node, DoublyLinkedList* dllist);
 
 #endif
