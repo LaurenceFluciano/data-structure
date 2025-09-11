@@ -6,7 +6,8 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/C/src/vectors",
                 "${workspaceFolder}/C/src/stack",
-                "${workspaceFolder}/C/unit"
+                "${workspaceFolder}/C/unit",
+                "${workspaceFolder}/C/src/linked_list"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
