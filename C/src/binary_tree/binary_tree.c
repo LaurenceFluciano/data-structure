@@ -12,6 +12,10 @@ NodeTree* createNodeTree(void *data, size_t size)
     NodeTree* temp = (NodeTree*)malloc(sizeof(NodeTree));
     if (!temp) return NULL;
     temp->data = malloc(size);
+    if (!temp->data) {
+        free(temp);
+        return NULL;
+    }
     temp->size = size;
     memcpy(temp->data, data, size);
     temp->left = temp->right = NULL;
