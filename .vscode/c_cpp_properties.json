@@ -4,22 +4,15 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/unit"
+                "${workspaceFolder}/C/src/vectors",
+                "${workspaceFolder}/C/src/stack",
+                "${workspaceFolder}/C/unit"
             ],
+            "defines": [],
             "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
             "intelliSenseMode": "linux-gcc-x64"
-        },
-        {
-            "name": "Windows-msvc",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "intelliSenseMode": "windows-msvc-x64"
-        },
-        {
-            "name": "Mac-Clang",
-            "intelliSenseMode": "macos-clang-x64",
-            "includePath": ["${workspaceFolder}/**"]
         }
     ],
     "version": 4

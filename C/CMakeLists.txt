@@ -10,6 +10,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/src/interface
     ${CMAKE_SOURCE_DIR}/src/queues
     ${CMAKE_SOURCE_DIR}/src/stack
+    ${CMAKE_SOURCE_DIR}/src/vectors
     ${CMAKE_SOURCE_DIR}/__test__
     ${CMAKE_SOURCE_DIR}/unit
 )
@@ -20,6 +21,7 @@ set(SOURCES
     src/stack/stack.c
     src/binary_tree/binary_tree.c
     src/interface/node_box.c
+    src/vectors/unordered_vectors.c
 )
 
 if(BUILD_MAIN)
