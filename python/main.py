@@ -1,21 +1,18 @@
 
-from vectors import UnorderedVector
-import time
+from vectors import Vector
 
-N = 1_000_000
 
-# Array puro
-start = time.time()
-pure_array = [None] * N
-for i in range(N):
-    pure_array[i] = i
-end = time.time()
-print(f"Array puro: {end - start:.6f} s")
+my_vec = Vector(8,True)
 
-# Vetor não ordenado
-start = time.time()
-vec = UnorderedVector(N)
-for i in range(N):
-    vec.insert(i)
-end = time.time()
-print(f"UnorderedVector: {end - start:.6f} s")
+my_vec.insert(8)
+my_vec.insert(6)
+my_vec.insert(4)
+my_vec.insert(2)
+my_vec.insert(9)
+my_vec.insert(5)
+my_vec.insert(3)
+
+for index in range(my_vec.getLastPosition()):
+    print(my_vec.getValueByIndex(index))
+
+print(my_vec.binarySearch(9))
