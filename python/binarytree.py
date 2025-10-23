@@ -25,60 +25,72 @@ class TreeNode:
         self._right = node
 
 class BinaryTree:
-    def __init__(self, node):
-        if node.left is not None or node.right is not None:
-            raise ValueError("TreeNode cannot have childrens.")
-        if node == None:
-            raise AttributeError('The root must contain a initial node.')
-        self.root = node
+    def __init__(self, value):
+        if value is None:
+            raise AttributeError('The root value must contain a initial value.')
+        root = TreeNode(value)
+        self.root = root
     
-    def insertNode(self, node):
-        if node.left is not None or node.right is not None:
-            raise ValueError("TreeNode cannot have childrens.")
+
+    def insert(self, value):
         currentNode = self.root
         # Problem: This cause imbalance.
         while (True):
-            if node.value > currentNode.value:
-                if currentNode.right == None:
-                    currentNode.right = node
+            if value > currentNode.value:
+                if currentNode.right is None:
+                    currentNode.right = TreeNode(value)
                     break
                 currentNode = currentNode.right
-            elif node.value < currentNode.value:
-                if currentNode.left == None:
-                    currentNode.left = node
+            elif value < currentNode.value:
+                if currentNode.left is None:
+                    currentNode.left = TreeNode(value)
                     break
                 currentNode = currentNode.left
+            # If node value already exists in the tree, do nothing.
             else:
                 break
     
-    def transversalPreOrder(self):
-        def visit(node):
-            if node is None:
-                return
-            print(node.value)
-            visit(node.left)
-            visit(node.right)
-        visit(self.root)
-    
+    def search(self, value):
+        currentNode = self.root
+        while currentNode is not None:
+            if value > currentNode.value:
+                currentNode = currentNode.right
+            elif value < currentNode.value:
+                currentNode = currentNode.left
+            else:
+                return currentNode.value
+        return None
 
-    def transversalInOrder(self):
-        def visit(node):
-            if node is None:
-                return
-            visit(node.left)
-            print(node.value)
-            visit(node.right)
-        visit(self.root)
-    
-    def transversalPostOrder(self):
-        def visit(node):
-            if node is None:
-                return
-            visit(node.left)
-            visit(node.right)
-            print(node.value)
-        visit(self.root)
+    def transversalPreOrder(self, reverse=False):
+        if reverse:
+            return self._transverse(("self", "right","left"))
+        return self._transverse(("self", "left","right"))
 
+    def transversalInOrder(self, reverse=False):
+        if reverse:
+            return self._transverse(("right", "self", "left"))
+        return self._transverse(("left", "self","right"))
+    
+    def transversalPostOrder(self, reverse=False):
+        if reverse:
+            return self._transverse(("right","left","self"))
+        return self._transverse(("left","right","self"))
+    
+    def _transverse(self, order=("left","right","self")):
+        internalList = list() 
+        def visit(node, internalList):
+            if node is None:
+                return
+            for step in order:
+                if step == "left":
+                    visit(node.left, internalList)
+                elif step == "right":
+                    visit(node.right, internalList)
+                elif step == "self":
+                    internalList.append(node.value)
+        visit(self.root, internalList)
+        return internalList
+    
     def remove(self, value):
         currentNode = self.root
         parent = None
@@ -90,13 +102,14 @@ class BinaryTree:
             else:
                 currentNode = currentNode.right
         
+
         if currentNode is None:
             return
 
         if currentNode.left == None and currentNode.right == None:
             if parent is None:
                 self.root = None
-            elif parent.left == currentNode:
+            if parent.left == currentNode:
                 parent.left = None
             else:
                 parent.right = None
@@ -106,11 +119,12 @@ class BinaryTree:
                 child = currentNode.left
             else:
                 child = currentNode.right
-    
+            
             if parent is None:
                 self.root = child
+                return
             
-            elif parent.left == currentNode:
+            if parent.left == currentNode:
                 parent.left = child
             else:
                 parent.right = child

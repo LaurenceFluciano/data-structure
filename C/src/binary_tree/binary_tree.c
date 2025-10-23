@@ -81,7 +81,7 @@ void removeNodeTree(BinaryTree* binaryTree, void *data, int (*cmprFunc)(void* x,
         } else {
             NodeTree* successorParent = binaryTree->root;
             NodeTree* successor = binaryTree->root->right;
-            while (successor.left) {
+            while (successor->left) {
                 successorParent = successor;
                 successor = successor->left;
             }
@@ -116,7 +116,7 @@ void removeNodeTree(BinaryTree* binaryTree, void *data, int (*cmprFunc)(void* x,
         // Node with two childrens
         NodeTree* successorParent = current;
         NodeTree* successor = current->right;
-        while (successor.left) {
+        while (successor->left) {
             successorParent = successor;
             successor = successor->left;
         }

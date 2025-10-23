@@ -1,0 +1,3 @@
+/media/laurence/laurence_files1/Softwares/Algoritmos/Data Structures/C/build/CMakeFiles/main.dir
+/media/laurence/laurence_files1/Softwares/Algoritmos/Data Structures/C/build/CMakeFiles/edit_cache.dir
+/media/laurence/laurence_files1/Softwares/Algoritmos/Data Structures/C/build/CMakeFiles/rebuild_cache.dir
